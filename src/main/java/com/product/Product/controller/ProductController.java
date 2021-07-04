@@ -1,8 +1,12 @@
 package com.product.Product.controller;
 
 import com.product.Product.entity.Product;
+import com.product.Product.error.ProductNotFoundException;
+import com.product.Product.error.TitleNotFoundException;
 import com.product.Product.service.ProductService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
+import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
@@ -30,8 +34,13 @@ public class ProductController {
     private ProductService productService;
 
     @PostMapping("/products")
-    public Product saveProduct(@Valid @RequestBody Product product){
+    public Product saveProduct(@RequestBody Product product) throws TitleNotFoundException {
+        System.out.println(product);
+        if(product.getTitle() == null){
+            throw new TitleNotFoundException("title nahi hai re baba");
+        }
         return productService.saveProduct(product);
+
     }
 
     @GetMapping("/products")

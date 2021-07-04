@@ -28,7 +28,7 @@ public class Product {
     @GeneratedValue(strategy = GenerationType.AUTO)
     private long productId;
 
-    @NotBlank(message = "This can't be blank, Give title ")
+//    @NotBlank(message = "This can't be blank, Give title ")
     private String title;
 
     private String description;
